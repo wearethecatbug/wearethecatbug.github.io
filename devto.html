@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .button {
+            background-color: pink;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 4px 4px;
+            cursor: pointer;
+            border-radius: 8px;
+            display: inline-block;
+            top: 50%;
+            left: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+
+        .button:hover {
+            background-color: #ffcfd8;
+        }
+
+        .button:active {
+            background-color: #f8aebe;
+        }
+    </style>
+</head>
+<body>
+<button class="button" onclick="changeBackground()">Change color</button>
+<script>
+
+    // let i = 0;
+	// function changeBackground() {
+	// 	let color = ['#D43853FF', '#E649EEFF', '#CFE2FFFF', '#EEE180FF'];
+	// 	let newColor = color[i++];
+	// 	document.body.style.background =newColor;
+	// 	if(i === color.length){
+	// 		i = 0;
+	// 	}
+	// }
+
+
+	// function changeBackground() {
+	// 	let color = ['#D43853FF', '#E649EEFF', '#CFE2FFFF', '#EEE180FF'];
+    //
+    //
+	// 	let newColor = Math.floor(Math.random() * color.length);
+	// 	document.body.style.background = color[newColor];
+    //
+	// }
+
+	function changeBackground() {
+
+		let redColor = Math.floor(Math.random() * 255);
+		let greenColor = Math.floor(Math.random() * 255);
+		let blueColor = Math.floor(Math.random() * 255);
+
+		document.body.style.background = `#${redColor.toString(16)}${greenColor.toString(16)}${blueColor.toString(16)}`;
+
+	}
+
+	setInterval(changeBackground, 10);
+
+
+</script>
+</body>
+</html>
