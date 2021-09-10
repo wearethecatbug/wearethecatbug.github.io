@@ -1,0 +1,493 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <title>Title</title>-->
+<!--  <style type="text/css">-->
+<!--    .iconsContainer {-->
+<!--      width: 20%;-->
+<!--    }-->
+<!--    .icon {-->
+<!--      width: 16px;-->
+<!--      height: 16px;-->
+<!--    }-->
+
+<!--    .myNewCoolStyle {-->
+<!--      float: right;-->
+<!--      pointer-events: auto;-->
+<!--      cursor: pointer;-->
+<!--    }-->
+<!--    .myNewCoolStyle:hover{-->
+<!--      display:block;-->
+<!--    }-->
+<!--    .weeks {-->
+<!--      background-color: rgba(255, 20, 147, 0.35);-->
+<!--      text-align: center;-->
+<!--    }-->
+<!--    .holidays {-->
+<!--      background: rgba(156, 59, 184, 0.96);-->
+<!--      text-align: center;-->
+<!--    }-->
+<!--    .days {-->
+<!--      background: #8667a0;-->
+<!--      text-align: center;-->
+<!--    }-->
+<!--    .currentDay {-->
+<!--      background: #3a1e4e;-->
+<!--      text-align: center;-->
+<!--    }-->
+<!--    .notCurrentMonth {-->
+<!--      background: #cdbbdc;-->
+<!--      text-align: center;-->
+<!--    }-->
+<!--  </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id = "date"></div>-->
+<!--</br>-->
+
+<!--<div class="iconsContainer">-->
+<!--  <div id="up" class="myNewCoolStyle"><img class="icon" src="arrowUP.png"></div>-->
+<!--  <div id="down" class="myNewCoolStyle"><img class="icon" src="arrowDOWN.png"></div>-->
+<!--</div>-->
+
+<!--</br>-->
+<!--<div id = "calendar"></div>-->
+<!--<script type="text/javascript">-->
+<!--  'use strict'-->
+
+<!--  function createDateTable(daysArray, today) { //должно вернуть строку содержащую таблицу как в примере-->
+<!--    let week = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];-->
+<!--    let table = '';-->
+<!--    table += '<table border="0" width="20%" >';-->
+
+<!--    for (let weekIndex = 0; weekIndex < week.length; weekIndex++) {-->
+<!--      table += '<th class = "weeks">';-->
+<!--      table += week[weekIndex];-->
+<!--      table += "</th>";-->
+<!--    }-->
+
+<!--    let daysindex = 0;-->
+<!--    for (let i = 1; i < 7; i++) {-->
+<!--      table += "<tr>";-->
+<!--      for (let j = 0; j < 7; j++) {-->
+<!--        table += `<td class ="${daysArray[daysindex].type}">`;-->
+<!--        table += daysArray[daysindex].day;-->
+<!--        table += "</td>";-->
+<!--        daysindex++;-->
+<!--      }-->
+<!--    }-->
+<!--    table += "</tr>";-->
+
+<!--    return table;-->
+<!--  }-->
+
+<!--  function getCurrentMonthDays(date) {-->
+<!--    date.setMonth(date.getMonth() +1);-->
+<!--    date.setDate(-1);-->
+<!--    return date.getDate();-->
+<!--  }-->
+
+<!--  function getDays(date) {-->
+<!--    let count = 0;-->
+<!--    let startDayDelta = getStartDayDelta(new Date(currentCalendarDate));-->
+<!--    let postDayDelta = startDayDelta + getCurrentMonthDays(new Date(currentCalendarDate));-->
+<!--    let dateArray = [];-->
+<!--    while (count < 42) {-->
+<!--      let day = {-->
+<!--        day: date.getDate(),-->
+<!--        type: 'days',-->
+<!--      };-->
+<!--      if (date.getDay() === 6 || date.getDay() === 0) {-->
+<!--        day.type = 'holidays';-->
+<!--      }-->
+<!--      if (count < startDayDelta || count > postDayDelta){-->
+<!--        day.type = 'notCurrentMonth';-->
+
+<!--      }-->
+
+
+<!--      dateArray.push(day);-->
+
+<!--      date.setDate(date.getDate() + 1);-->
+<!--      count++;-->
+<!--    }-->
+
+<!--    if (startDate.getFullYear() === currentCalendarDate.getFullYear() && startDate.getMonth() === currentCalendarDate.getMonth()) {-->
+<!--      let today = startDayDelta + currentCalendarDate.getDate() - 1;-->
+<!--      dateArray[today].type = "currentDay";-->
+<!--    }-->
+
+<!--    return dateArray;-->
+<!--  }-->
+
+<!--  function getDayOfWeek(date) { //возвращает номер дня недели равный номеру в колонке-->
+
+<!--    let days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];-->
+
+<!--    return days[date.getDay()];-->
+<!--  }-->
+
+<!--  function calculateStartDate(date) {//должна вернуть стартовую дату-->
+<!--    date.setDate(1 - getStartDayDelta(date));-->
+<!--    return date;-->
+<!--  }-->
+
+<!--  function getStartDayDelta(date) {-->
+<!--    date.setDate(1);-->
+<!--    let days = [7, 1, 2, 3, 4, 5, 6];-->
+<!--    let countPreviousDays = (days[date.getDay()] - 1);-->
+<!--    return countPreviousDays;-->
+<!--  }-->
+
+<!--  let startDate = new Date(); //считаем стартовую дату-->
+<!--  let currentCalendarDate = new Date(startDate);-->
+
+<!--  function update() {-->
+<!--    let currentDate = calculateStartDate(new Date(currentCalendarDate)); //текущая дата, которая выбирается в календаре-->
+
+
+<!--    document.getElementById("calendar").innerHTML = createDateTable(getDays(currentDate));-->
+<!--  }-->
+
+<!--  document.getElementById("down").onclick = function () {-->
+<!--    currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);-->
+<!--    update()-->
+<!--  }-->
+
+<!--  document.getElementById("up").onclick = function () {-->
+<!--    currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);-->
+<!--    update()-->
+<!--  }-->
+
+<!--  update();-->
+
+
+<!--  function partial(func, ...argsBound) {-->
+<!--    return function (...args) {-->
+<!--      return func.call(this, ...argsBound, ...args);-->
+<!--    }-->
+<!--  }-->
+
+
+<!--  let user = {-->
+<!--    firstName: "Catbug",-->
+<!--    say(time, phrase) {-->
+<!--      document.getElementById("date").innerHTML = (`${this.firstName}: ${phrase} ${formatDate(date)}!`);-->
+<!--    }-->
+<!--  };-->
+
+<!--  user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes() +  ':' + new Date().getSeconds());-->
+
+<!--  user.sayNow(`Today is`);-->
+
+<!--  function formatDate(date) {-->
+<!--    date = new Date ()-->
+<!--    let dayOfMonth = date.getDate();-->
+<!--    let month = date.getMonth() + 1;-->
+<!--    let year = date.getFullYear();-->
+<!--    let hour = date.getHours();-->
+<!--    let minutes = date.getMinutes();-->
+<!--    let seconds = date.getSeconds();-->
+
+
+<!--    year = year.toString();-->
+<!--    month = month < 10 ? '0' + month : month;-->
+<!--    dayOfMonth = dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth;-->
+<!--    hour = hour < 10 ? '0' + hour : hour;-->
+<!--    minutes = minutes < 10 ? '0' + minutes : minutes;-->
+<!--    seconds = seconds < 10 ? '0' + seconds : seconds;-->
+<!--    return `${dayOfMonth}.${month}.${year} ${hour}:${minutes}:${seconds}`-->
+<!--  }-->
+
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style type="text/css">
+    .iconsContainer {
+      width: 20%;
+      margin: 10px;
+    }
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .myNewCoolStyle {
+      float: right;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .myNewCoolStyle:hover{
+      display:block;
+    }
+    .currentDay {
+      background: rgba(222, 105, 27, 0.43) !important;
+      text-align: center;
+    }
+    .notCurrentMonth {
+      background: #cdbbdc !important;
+      text-align: center;
+    }
+
+    .styled-table {
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      min-width: 400px;
+      border-radius: 10px 10px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .styled-table thead tr {
+      background-color: #7221c4;
+      color: #ffffff;
+      text-align: left;
+    }
+    .styled-table th,
+    .styled-table td {
+      padding: 12px 15px;
+    }
+
+    .styled-table tbody tr {
+      text-align: center;
+    }
+    .styled-table tbody tr:nth-child(even) td:nth-child(even), tr:nth-child(odd) td:nth-child(odd) {
+      background-color: #f3f3f3;
+    }
+    .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid #32198b;
+    }
+
+    .styled-expression {
+      margin: 15px 0px;
+      border-bottom: 2px solid #32198b;
+      width: 400px;
+    }
+    .styled-month-year {
+      margin: 10px 0px 0px 15px;
+      text-align: left;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      font: normal  small-caps bold 15px Arial;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+    .styled-catbug {
+      margin: 0px 0px 0px 15px;
+      text-align: left;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      font: normal  small-caps  15px Arial;
+      border-bottom: 2px solid #32198b;
+    }
+
+    .styled-month-year:hover {
+      display:block;
+      color: indianred;
+    }
+
+
+
+
+    /*.weeks {*/
+    /*  background-color: #8245de;*/
+    /*  color: #ffffff;*/
+    /*  text-align: center;*/
+    /*}*/
+    /*.holidays {*/
+    /*  background: rgba(156, 59, 184, 0.96);*/
+    /*  text-align: center;*/
+    /*}*/
+    /*.days {*/
+    /*  background: #8667a0;*/
+    /*  text-align: center;*/
+    /*}*/
+
+  </style>
+</head>
+
+<body>
+<div id = "date" class="styled-catbug"></div>
+<!--<div id ="year" class="styled-month-year"></div>-->
+<div class="iconsContainer">
+  <div id="up" class="myNewCoolStyle"><img class="icon" src="arrowUP.png"></div>
+  <div id="down" class="myNewCoolStyle"><img class="icon" src="arrowDOWN.png"></div>
+</div>
+<div id ="year" class="styled-month-year"></div>
+<div id = "calendar"></div>
+<script type="text/javascript">
+  'use strict'
+
+  function createDateTable(daysArray, today) { //должно вернуть строку содержащую таблицу как в примере
+    let week = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+    let table = '';
+    table += '<table class="styled-table">';
+    table += '<thead>';
+    for (let weekIndex = 0; weekIndex < week.length; weekIndex++) {
+      table += '<th class = "weeks">';
+      table += week[weekIndex];
+      table += '</th>';
+    }
+    table += '</thead>';
+    table += '<tbody>';
+    let daysindex = 0;
+    for (let i = 1; i < 7; i++) {
+      table += '<tr>';
+      for (let j = 0; j < 7; j++) {
+        table += `<td class ="${daysArray[daysindex].type}">`;
+        table += daysArray[daysindex].day;
+        table += "</td>";
+        daysindex++;
+      }
+      table += '</tr>';
+    }
+    table += '</tbody>';
+    return table;
+  }
+
+  function getCurrentMonthDays(date) {
+    date.setMonth(date.getMonth() +1);
+    date.setDate(-1);
+    return date.getDate();
+  }
+
+  function getDays(date) {
+    let count = 0;
+    let startDayDelta = getStartDayDelta(new Date(currentCalendarDate));
+    let postDayDelta = startDayDelta + getCurrentMonthDays(new Date(currentCalendarDate));
+    let dateArray = [];
+    while (count < 42) {
+      let day = {
+        day: date.getDate(),
+        type: 'days',
+      };
+      if (date.getDay() === 6 || date.getDay() === 0) {
+        day.type = 'holidays';
+      }
+      if (count < startDayDelta || count > postDayDelta){
+        day.type = 'notCurrentMonth';
+
+      }
+
+
+      dateArray.push(day);
+
+      date.setDate(date.getDate() + 1);
+      count++;
+    }
+
+    if (startDate.getFullYear() === currentCalendarDate.getFullYear() && startDate.getMonth() === currentCalendarDate.getMonth()) {
+      let today = startDayDelta + currentCalendarDate.getDate() - 1;
+      dateArray[today].type = "currentDay";
+    }
+
+    return dateArray;
+  }
+
+  function getDayOfWeek(date) { //возвращает номер дня недели равный номеру в колонке
+
+    let days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+
+    return days[date.getDay()];
+  }
+
+  function calculateStartDate(date) {//должна вернуть стартовую дату
+    date.setDate(1 - getStartDayDelta(date));
+    return date;
+  }
+
+  function getStartDayDelta(date) {
+    date.setDate(1);
+    let days = [7, 1, 2, 3, 4, 5, 6];
+    let countPreviousDays = (days[date.getDay()] - 1);
+    return countPreviousDays;
+  }
+
+  let startDate = new Date(); //считаем стартовую дату
+  let currentCalendarDate = new Date(startDate);
+
+  function update() {
+    let currentDate = calculateStartDate(new Date(currentCalendarDate)); //текущая дата, которая выбирается в календаре
+    // document.querySelector(id"year").innerHTML = getMonthYear(date);
+    document.getElementById("year").innerHTML = getMonthYear(date);
+
+    document.getElementById("calendar").innerHTML = createDateTable(getDays(currentDate));
+  }
+
+  document.getElementById("down").onclick = function () {
+    currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
+    update()
+  }
+
+  document.getElementById("up").onclick = function () {
+    currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
+    update()
+  }
+
+  update();
+
+
+  function partial(func, ...argsBound) {
+    return function (...args) {
+      return func.call(this, ...argsBound, ...args);
+    }
+  }
+
+
+  let user = {
+    firstName: "Catbug",
+    say(time, phrase) {
+      document.getElementById("date").innerHTML = (`${this.firstName}: ${phrase} ${formatDate(date)}!`);
+    }
+  };
+
+  user.sayNow = partial(user.say, new Date().getHours() + ':' + new Date().getMinutes() +  ':' + new Date().getSeconds());
+
+  setInterval(() => user.sayNow(`Today is`), 1000);
+
+  function formatDate(date) {
+    date = new Date ()
+    let dayOfMonth = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let minutes = date.getMinutes();
+    let seconds = date.getSeconds();
+
+
+    year = year.toString();
+    month = month < 10 ? '0' + month : month;
+    dayOfMonth = dayOfMonth < 10 ? '0' + dayOfMonth : dayOfMonth;
+    hour = hour < 10 ? '0' + hour : hour;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    seconds = seconds < 10 ? '0' + seconds : seconds;
+    return `${dayOfMonth}.${month}.${year} ${hour}:${minutes}:${seconds}`
+  }
+
+  function getMonthYear (date) {
+    date = new Date();
+
+    let options = {  month: 'long', year: 'numeric' };
+    let str =  date.toLocaleDateString(undefined, options)
+    let firstLetter =  str.charAt(0);
+    let upperFirstLetter = firstLetter.toUpperCase();
+    str = str.replace(firstLetter,  upperFirstLetter).slice(0, -3);
+    return str;
+  }
+
+
+
+
+</script>
+</body>
+</html>
