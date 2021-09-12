@@ -228,13 +228,20 @@
     .myNewCoolStyle:hover{
       display:block;
     }
+
     .currentDay {
-      background: rgba(222, 105, 27, 0.43) !important;
+      background: rgb(248, 205, 178) !important;
       text-align: center;
+      border: 4px solid #564786;
+
     }
+    .currentDay:hover {
+      background: rgba(2, 25, 231, 0.43) !important;
+
+    }
+
     .notCurrentMonth {
       background: #cdbbdc !important;
-      text-align: center;
     }
 
     .styled-table {
@@ -248,14 +255,17 @@
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     }
 
+
     .styled-table thead tr {
       background-color: #7221c4;
       color: #ffffff;
       text-align: left;
+
     }
     .styled-table th,
     .styled-table td {
       padding: 12px 15px;
+      /*pointer-events: none;*/
     }
 
     .styled-table tbody tr {
@@ -266,6 +276,13 @@
     }
     .styled-table tbody tr:last-of-type {
       border-bottom: 2px solid #32198b;
+    }
+
+    /*.styled-table tbody td {*/
+    /*  background-color:transparent;*/
+    /*}*/
+    .styled-table tbody td:hover {
+      background-color: rgba(232, 165, 165, 0.43) !important;
     }
 
     .styled-expression {
@@ -297,28 +314,10 @@
     }
 
 
-
-
-    /*.weeks {*/
-    /*  background-color: #8245de;*/
-    /*  color: #ffffff;*/
-    /*  text-align: center;*/
-    /*}*/
-    /*.holidays {*/
-    /*  background: rgba(156, 59, 184, 0.96);*/
-    /*  text-align: center;*/
-    /*}*/
-    /*.days {*/
-    /*  background: #8667a0;*/
-    /*  text-align: center;*/
-    /*}*/
-
   </style>
 </head>
-
 <body>
 <div id = "date" class="styled-catbug"></div>
-<!--<div id ="year" class="styled-month-year"></div>-->
 <div class="iconsContainer">
   <div id="up" class="myNewCoolStyle"><img class="icon" src="arrowUP.png"></div>
   <div id="down" class="myNewCoolStyle"><img class="icon" src="arrowDOWN.png"></div>
@@ -334,7 +333,7 @@
     table += '<table class="styled-table">';
     table += '<thead>';
     for (let weekIndex = 0; weekIndex < week.length; weekIndex++) {
-      table += '<th class = "weeks">';
+      table += '<th >';
       table += week[weekIndex];
       table += '</th>';
     }
@@ -379,7 +378,6 @@
 
       }
 
-
       dateArray.push(day);
 
       date.setDate(date.getDate() + 1);
@@ -395,9 +393,7 @@
   }
 
   function getDayOfWeek(date) { //возвращает номер дня недели равный номеру в колонке
-
     let days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-
     return days[date.getDay()];
   }
 
@@ -436,18 +432,16 @@
 
   update();
 
-
   function partial(func, ...argsBound) {
     return function (...args) {
       return func.call(this, ...argsBound, ...args);
     }
   }
 
-
   let user = {
-    firstName: "Catbug",
+    firstName: " <span style=\"color:mediumpurple;font-weight:bold\">Catbug:</span>",
     say(time, phrase) {
-      document.getElementById("date").innerHTML = (`${this.firstName}: ${phrase} ${formatDate(date)}!`);
+      document.getElementById("date").innerHTML = (`${this.firstName} ${phrase} ${formatDate(date)}!`);
     }
   };
 
@@ -463,7 +457,6 @@
     let hour = date.getHours();
     let minutes = date.getMinutes();
     let seconds = date.getSeconds();
-
 
     year = year.toString();
     month = month < 10 ? '0' + month : month;
@@ -484,9 +477,6 @@
     str = str.replace(firstLetter,  upperFirstLetter).slice(0, -3);
     return str;
   }
-
-
-
 
 </script>
 </body>
