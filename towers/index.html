@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      html, body {
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          margin: 0;
+      }
+      #debug {
+          z-index: 9999;
+          width: auto;
+          height: auto;
+          display: block;
+          position: absolute;
+      }
+      #gameView {
+          z-index: 1;
+          overflow: hidden;
+          width: auto;
+          height: auto;
+          display: block;
+          position: absolute;
+      }
+  </style>
+</head>
+<body>
+<div id="gameView"></div>
+<canvas id="debug"></canvas>
+<script src="index.js"></script>
+</body>
+</html>
